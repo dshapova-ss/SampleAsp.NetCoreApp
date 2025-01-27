@@ -43,10 +43,7 @@ jobs:
         run: docker build . -t webapp:latest
         
       - name: trivyscan
-        uses: lazy-actions/gitrivy@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          image: webapp:latest
+        run: trivy image webapp:latest
     
   deploy:
     runs-on: self-hosted
