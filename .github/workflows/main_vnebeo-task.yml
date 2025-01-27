@@ -9,11 +9,6 @@ on:
       - main
   workflow_dispatch:
 
-env:
-  WEBAPP_NAME: vnebeo-task
-  RESOURCE_GROUP: vnebo
-  SLOT_NAME: stage
-
 jobs:
   build:
     runs-on: self-hosted
@@ -83,6 +78,10 @@ jobs:
   deployprod:
     runs-on: self-hosted
     needs: deploystage
+    env:
+      WEBAPP_NAME: vnebeo-task
+      RESOURCE_GROUP: vnebo
+      SLOT_NAME: stage
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
