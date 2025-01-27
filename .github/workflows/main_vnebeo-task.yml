@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - uses: actions/checkout@v4
@@ -33,9 +33,22 @@ jobs:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
 
-  deploy:
-    runs-on: ubuntu-latest
+  integration:
+    runs-on: self-hosted
     needs: build
+    steps: 
+      - name: docker build
+        run: docker build . -t webapp:latest
+        
+      - name: trivyscan
+      - uses: lazy-actions/gitrivy@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          image: webapp:latest
+    
+  deploy:
+    runs-on: self-hosted
+    needs: integration
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
