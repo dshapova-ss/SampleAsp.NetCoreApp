@@ -36,12 +36,12 @@ jobs:
   integration:
     runs-on: self-hosted
     needs: build
-    steps: 
+    steps:
       - name: docker build
         run: docker build . -t webapp:latest
         
       - name: trivyscan
-      - uses: lazy-actions/gitrivy@v3
+        uses: lazy-actions/gitrivy@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           image: webapp:latest
