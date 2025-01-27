@@ -72,7 +72,7 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'vnebeo-task'
-          slot-name: 'vnebeo-task-stage'
+          slot-name: 'stage'
           package: .
           
   deployprod:
