@@ -82,6 +82,7 @@ jobs:
       WEBAPP_NAME: vnebeo-task
       RESOURCE_GROUP: vnebo
       SLOT_NAME: stage
+      TARGET_SLOT_NAME: prod
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
@@ -102,6 +103,6 @@ jobs:
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A253D9FE1FDB4D3688E7F76F7E37E22B }}
 
       - name: Swap stage slot to production
-        run: az webapp deployment slot swap -s ${{ env.SLOT_NAME }} -n ${{ env.WEBAPP_NAME }} -g ${{ env.RESOURCE_GROUP }}
+        run: az webapp deployment slot swap -s ${{ env.SLOT_NAME }} -n ${{ env.WEBAPP_NAME }} -g ${{ env.RESOURCE_GROUP }} -t ${{env.TARGET_SLOT_NAME}}
       
 
