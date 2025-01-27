@@ -103,6 +103,6 @@ jobs:
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A253D9FE1FDB4D3688E7F76F7E37E22B }}
 
       - name: Swap stage slot to production
-        run: az webapp deployment slot swap -s ${{ env.SLOT_NAME }} -n ${{ env.WEBAPP_NAME }} -g ${{ env.RESOURCE_GROUP }} -t ${{env.TARGET_SLOT_NAME}}
+        run: az webapp deployment slot swap --resource-group ${{ env.RESOURCE_GROUP }} --name ${{ env.WEBAPP_NAME }} --slot ${{ env.SLOT_NAME }} --target-slot ${{env.TARGET_SLOT_NAME}}
       
 
